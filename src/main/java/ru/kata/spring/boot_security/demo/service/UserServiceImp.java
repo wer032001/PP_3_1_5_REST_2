@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImp implements UserService {
+
     private final UserRepository userRepository;
 
     @Override
@@ -26,10 +27,27 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User updateUser(User user, Long id) {
-        userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Пользователь с id %s не найден", id)));
-        return userRepository.saveAndFlush(user);
+        User updateUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Пользователь с id %s не найден", id)));
+        if (user.getFirstName() != null) {
+         updateUser.setFirstName(user.getFirstName());
+        }
+        if (user.getLastName() != null) {
+            updateUser.setLastName(user.getLastName());
+        }
+        if (user.getAge() != 0) {
+            updateUser.setAge(user.getAge());
+        }
+        if (user.getEmail() != null) {
+            updateUser.setEmail(user.getEmail());
+        }
+        if (user.getPassword() != null) {
+            updateUser.setEmail(user.getEmail());
+        }
+        if (user.getRoles() != null) {
+            updateUser.setRoles(user.getRoles());
+        }
+        return userRepository.save(updateUser);
     }
-
     @Override
     public List<User> listUsers() {
         return userRepository.findAll();

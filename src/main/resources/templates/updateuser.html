@@ -9,6 +9,32 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Навбар</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Ссылка</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="btn btn-primary" th:href="@{/login}" type="button">
+            Logout
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
 <br>
 <br>
 <br>
@@ -19,7 +45,7 @@
       <br>
       <h2 class="text-center"> Edit User </h2>
       <div class="card-body">
-        <form th:action="@{/users/{id} (id=${user.id})}" th:object="${user}" method="POST">
+        <form th:action="@{/admin/{id} (id=${user.id})}" th:object="${user}" method="POST">
           <div class="form-group">
             <label> <b>First Name</b> </label>
             <input
@@ -64,11 +90,35 @@
             />
           </div>
           <br>
+          <div class="form-group">
+            <label> <b>Password</b> </label>
+            <input
+                    type="text"
+                    name="password"
+                    th:field="*{password}"
+                    class="form-control"
+                    placeholder="Enter Password"
+            />
+          </div>
+          <br>
+          <div class="form-group">
+            <label> <b>Role</b> </label>
+            <!--                                    <input-->
+            <!--                                            type="text"-->
+            <!--                                            name="roles"-->
+            <!--                                            th:field="*{roles}">-->
+            <select class="form-select" aria-label="Пример выбора по умолчанию">
+              <option selected>Role</option>
+              <option value="1">ADMIN</option>
+              <option value="2">USER</option>
+            </select>
+          </div>
+          <br>
           <div class="box-footer">
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-              <a th:href="@{/users}"
+              <a th:href="@{/admin}"
                  class="btn btn-secondary me-md-2">Close</a>
 
               <button type="submit" class="btn btn-primary">
