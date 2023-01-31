@@ -54,76 +54,81 @@
                     <div class="container">
                         <div class="row">
                             <br>
-                            <h2 class="text-center"> Add New User </h2>
+                            <h3 class="text-center"> Add new user </h3>
                             <div class="card-body">
                                 <form th:action="@{/admin}" th:object="${user}" method="POST">
                                     <div class="form-group">
-                                        <label> <b>First Name</b> </label>
+                                        <label for="validationDefault01" class="form-label"><b>First Name</b></label>
                                         <input
                                                 type="text"
                                                 name="firstName"
                                                 th:field="*{firstName}"
                                                 class="form-control"
+                                                id="validationDefault01"
                                                 placeholder="Enter First Name"
+                                                required
                                         />
                                     </div>
                                     <br>
                                     <div class="form-group">
-                                        <label> <b>Last Name</b> </label>
+                                        <label for="validationDefault02" class="form-label"><b>Last Name</b></label>
                                         <input
                                                 type="text"
                                                 name="lastName"
                                                 th:field="*{lastName}"
                                                 class="form-control"
                                                 placeholder="Enter Last Name"
+                                                id="validationDefault02"
+                                                required
                                         />
                                     </div>
                                     <br>
                                     <div class="form-group">
-                                        <label> <b>Age</b> </label>
+                                        <label for="validationDefault03" class="form-label"><b>Age</b></label>
                                         <input
                                                 type="text"
-                                                name="lastName"
+                                                name="age"
                                                 th:field="*{age}"
                                                 class="form-control"
                                                 placeholder="Enter Age"
+                                                id="validationDefault03"
+                                                required
                                         />
                                     </div>
                                     <br>
                                     <div class="form-group">
-                                        <label> <b>Email</b> </label>
+                                        <label for="validationDefault04" class="form-label"><b>Email</b></label>
                                         <input
-                                                type="text"
+                                                type="email"
                                                 name="email"
                                                 th:field="*{email}"
                                                 class="form-control"
                                                 placeholder="Enter Email"
+                                                id="validationDefault04"
+                                                required
                                         />
                                     </div>
                                     <br>
                                     <div class="form-group">
-                                        <label> <b>Password</b> </label>
+                                        <label for="validationDefault05" class="form-label"><b>Password</b></label>
                                         <input
-                                                type="text"
+                                                type="password"
                                                 name="password"
                                                 th:field="*{password}"
                                                 class="form-control"
                                                 placeholder="Enter Password"
+                                                id="validationDefault05"
+                                                required
                                         />
                                     </div>
                                     <br>
-                                    <div class="form-group">
+                                    <div>
                                         <label> <b>Role</b> </label>
-                                        <input
-                                                type="text"
-                                                name="roles"
-                                                th:field="*{roles}"
-                                                class="form-control">
-                                        <!--                                <select class="form-select" aria-label="Пример выбора по умолчанию">-->
-                                        <!--                                    <option selected>Role</option>-->
-                                        <!--                                    <option value="1">ADMIN</option>-->
-                                        <!--                                    <option value="2">USER</option>-->
-                                        <!--                                </select>-->
+                                        <select class="form-select" name="roles" th:field="*{roles}">
+                                            <option th:value="ADMIN">ADMIN</option>
+                                            <option th:value="USER">USER</option>
+                                            <!--                                            <option th:value="USER,ADMIN">ADMIN,USER</option>-->
+                                        </select>
                                     </div>
                                     <br>
                                     <div class="box-footer">
