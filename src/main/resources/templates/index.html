@@ -17,35 +17,21 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Навбар</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Главная</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="btn btn-primary" th:href="@{/login}" type="button">
-                        Logout
-                    </a>
-                </li>
-
-            </ul>
-        </div>
+<div class="text-bg-dark p-3 d-flex justify-content-between align-items-center">
+    <div class="d-flex">
+        <b style="padding-left: 8px;">Admin@mail.ru&ensp;</b>
+<!--        <span>with roles:&ensp;</span>-->
+<!--        <span class="text-uppercase">admin user</span>-->
     </div>
-</nav>
+    <div class="nav-item">
+        <a class="btn btn-outline-secondary" th:href="@{/login}" type="button">Logout</a>
+    </div>
+</div>
 
 <!-- Button trigger modal -->
 <div style="margin: 20px;">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser">
-        Add User
+        Add user
     </button>
 </div>
 
@@ -54,18 +40,20 @@
     <!-- Modal -->
     <div class="modal fade" id="addUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal modal-sm">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add user</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Закрыть"></button>
+                </div>
 
                 <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <br>
-                            <h3 class="text-center"> Add new user </h3>
-                            <div class="card-body">
                                 <form th:action="@{/admin}" th:object="${user}" method="POST">
                                     <div class="form-group">
-                                        <label for="validationDefault01" class="form-label"><b>First Name</b></label>
+                                        <label for="validationDefault01" class="form-label"
+                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">First
+                                            Name</label>
                                         <input
                                                 type="text"
                                                 name="firstName"
@@ -76,9 +64,10 @@
                                                 required
                                         />
                                     </div>
-                                    <br>
                                     <div class="form-group">
-                                        <label for="validationDefault02" class="form-label"><b>Last Name</b></label>
+                                        <label for="validationDefault02" class="form-label"
+                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Last
+                                            Name</label>
                                         <input
                                                 type="text"
                                                 name="lastName"
@@ -89,9 +78,9 @@
                                                 required
                                         />
                                     </div>
-                                    <br>
                                     <div class="form-group">
-                                        <label for="validationDefault03" class="form-label"><b>Age</b></label>
+                                        <label for="validationDefault03" class="form-label"
+                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Age</label>
                                         <input
                                                 type="number"
                                                 name="age"
@@ -102,9 +91,9 @@
                                                 required
                                         />
                                     </div>
-                                    <br>
                                     <div class="form-group">
-                                        <label for="validationDefault04" class="form-label"><b>Email</b></label>
+                                        <label for="validationDefault04" class="form-label"
+                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Email</label>
                                         <input
                                                 type="email"
                                                 name="email"
@@ -115,9 +104,9 @@
                                                 required
                                         />
                                     </div>
-                                    <br>
                                     <div class="form-group">
-                                        <label for="validationDefault05" class="form-label"><b>Password</b></label>
+                                        <label for="validationDefault05" class="form-label"
+                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Password</label>
                                         <input
                                                 type="password"
                                                 name="password"
@@ -128,13 +117,11 @@
                                                 required
                                         />
                                     </div>
-                                    <br>
                                     <div>
-                                        <label> <b>Role</b> </label>
+                                        <label style="display: flex; justify-content: center; font-size: 18px; margin-bottom: 10px; font-weight: 500; margin-top: 8px;">Role</label>
                                         <select class="form-select" name="roles" th:field="*{roles}">
                                             <option th:value="ADMIN">ADMIN</option>
                                             <option th:value="USER">USER</option>
-                                            <!--                                            <option th:value="USER,ADMIN">ADMIN,USER</option>-->
                                         </select>
                                     </div>
                                     <br>
@@ -181,13 +168,13 @@
         </thead>
         <tbody>
         <tr th:each="user: ${users}">
-            <td th:text="${user.getId()}">id</td>
-            <td th:text="${user.getFirstName()}">firstname</td>
-            <td th:text="${user.getLastName()}">lastName</td>
-            <td th:text="${user.getAge()}">age</td>
-            <td th:text="${user.getEmail()}">email</td>
-            <td th:text="${user.getPassword()}">password</td>
-            <td th:text="${user.getRoles()}">role</td>
+            <td class="align-middle" th:text="${user.getId()}">id</td>
+            <td class="align-middle" th:text="${user.getFirstName()}">firstname</td>
+            <td class="align-middle" th:text="${user.getLastName()}">lastName</td>
+            <td class="align-middle" th:text="${user.getAge()}">age</td>
+            <td class="align-middle" th:text="${user.getEmail()}">email</td>
+            <td class="align-middle" th:text="${user.getPassword()}">password</td>
+            <td class="align-middle" th:text="${user.getRoles()}">role</td>
             <td>
                 <a th:href="@{/admin/edit/{id}(id=${user.id})}" type="button" class="btn btn-primary">
                     Edit
