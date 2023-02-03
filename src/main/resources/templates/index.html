@@ -8,128 +8,281 @@
     <title>Table Users</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <style>
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-    </style>
 </head>
+
 <body>
 <div class="text-bg-dark p-3 d-flex justify-content-between align-items-center">
     <div class="d-flex">
-        <b style="padding-left: 8px;">Admin@mail.ru&ensp;</b>
-<!--        <span>with roles:&ensp;</span>-->
-<!--        <span class="text-uppercase">admin user</span>-->
+        <b>Admin@mailru&ensp;</b>
+        <span>with roles:&ensp;</span>
+        <span class="text-uppercase">admin user</span>
     </div>
     <div class="nav-item">
         <a class="btn btn-outline-secondary" th:href="@{/login}" type="button">Logout</a>
     </div>
+
 </div>
 
-<!-- Button trigger modal -->
-<div style="margin: 20px;">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser">
-        Add user
-    </button>
-</div>
+<!-- Modal -->
+<div class="modal fade" id="addUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal modal-sm">
+        <div class="modal-content">
 
-<div style="margin: 20px;">
+            <div class="modal-body">
+                <div class="container">
 
-    <!-- Modal -->
-    <div class="modal fade" id="addUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add user</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Закрыть"></button>
                 </div>
+            </div>
 
-                <div class="modal-body">
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal -->
+
+<div class="row">
+    <div class="col-2 p-0">
+        <div class="left_side" style="margin-top: 15px;">
+            <div class="d-flex align-items-start">
+                <div class="nav flex-column nav-pills w-100" id="v-pills-tab" role="tablist"
+                     aria-orientation="vertical">
+                    <button class="nav-link active rounded-0 d-flex justify-content-start" style="padding-left: 29px;"
+                            id="v-pills-home-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
+                            aria-selected="true">Admin
+                    </button>
+                    <button class="nav-link rounded-0 d-flex justify-content-start" style="padding-left: 29px;"
+                            id="v-pills-profile-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
+                            aria-selected="false">User
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-10 p-0 tab-content" id="v-pills-tabContent" style="padding: 20px; background-color:#F9FAFA;">
+        <div class="wrapper tab-pane fade show active" id="v-pills-home" role="tabpanel"
+             aria-labelledby="v-pills-home-tab" tabindex="0" style="min-height:100vh; padding: 10px 30px 30px 30px;">
+            <div class="title"
+                 style="font-size: 36px; font-weight: 600; background-color: #f9fafa; margin-bottom: 15px;">Admin panel
+            </div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                            data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
+                            aria-selected="true">Users table
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                            data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane"
+                            aria-selected="false">New User
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+                     tabindex="0">
+                    <div class="all_user"
+                         style="font-size: 24px; font-weight: 600; padding: 10px; border-color: #dee2e6;">All users
+                    </div>
+                    <table class="table caption-top table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user: ${users}">
+                            <td class="align-middle" th:text="${user.getId()}">id</td>
+                            <td class="align-middle" th:text="${user.getFirstName()}">firstname</td>
+                            <td class="align-middle" th:text="${user.getLastName()}">lastName</td>
+                            <td class="align-middle" th:text="${user.getAge()}">age</td>
+                            <td class="align-middle" th:text="${user.getEmail()}">email</td>
+                            <td class="align-middle" th:text="${user.getPassword()}">password</td>
+                            <td class="align-middle" th:text="${user.getRoles()}">role</td>
+                            <!-- <td>
+                        <a th:href="@{/admin/edit/{id}(id=${user.id})}" type="button" class="btn btn-primary">
+                            Edit
+                        </a>
+
+                    </td> -->
+
+                            <td>
+                                <!-- Кнопка-триггер модального окна -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">
+                                    Edit
+                                </button>
+
+                                <!-- Модальное окно -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Закрыть"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form th:action="@{/admin}" th:object="${user}" method="POST">
+                                                    <div class="form-group">
+                                                        <label for="validationDefault01" class="form-label"
+                                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500;">First
+                                                            Name</label>
+                                                        <input type="text" name="firstName"
+                                                               th:field="*{firstName}" class="form-control"
+                                                               id="validationDefault01"
+                                                               placeholder="Enter First Name" required/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="validationDefault02" class="form-label"
+                                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Last
+                                                            Name</label>
+                                                        <input type="text" name="lastName"
+                                                               th:field="*{lastName}" class="form-control"
+                                                               placeholder="Enter Last Name"
+                                                               id="validationDefault02" required/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="validationDefault03" class="form-label"
+                                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Age</label>
+                                                        <input type="text" name="age" th:field="*{age}"
+                                                               class="form-control" placeholder="Enter Age"
+                                                               id="validationDefault03" required/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="validationDefault04" class="form-label"
+                                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Email</label>
+                                                        <input type="email" name="email" th:field="*{email}"
+                                                               class="form-control" placeholder="Enter Email"
+                                                               id="validationDefault04" required/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="validationDefault05" class="form-label"
+                                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Password</label>
+                                                        <input type="password" name="password"
+                                                               th:field="*{password}" class="form-control"
+                                                               placeholder="Enter Password"
+                                                               id="validationDefault05" required/>
+                                                    </div>
+
+                                                    <div>
+                                                        <label
+                                                                style="display: flex; justify-content: center; font-size: 18px; margin-bottom: 10px; font-weight: 500; margin-top: 8px;">Role</label>
+                                                        <select class="form-select" name="roles"
+                                                                th:field="*{roles}">
+                                                            <option th:value="ADMIN">ADMIN</option>
+                                                            <option th:value="USER">USER</option>
+
+                                                        </select>
+                                                    </div>
+                                                    <br>
+                                                    <div class="box-footer">
+                                                        <div
+                                                                class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+                                                            <a th:href="@{/admin}"
+                                                               class="btn btn-secondary me-md-2">Close</a>
+
+                                                            <button type="submit" class="btn btn-primary">
+                                                                Edit
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <a th:href="@{/admin/{id}(id=${user.id})}" class="btn btn-danger">Delete
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" style="background-color:#ffff; border: 1px solid #d2d4d4;"
+                     id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                    <div class="header"
+                         style="background-color:#f9fafa ; border-bottom: 1px solid #d2d4d4; font-size: 24px; font-weight: 500; padding: 6px 0 15px 15px; margin-bottom: 25px;">
+                        Add user
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-3">
+                            <div class="card-body" style="margin-bottom: 25px;">
                                 <form th:action="@{/admin}" th:object="${user}" method="POST">
                                     <div class="form-group">
-                                        <label for="validationDefault01" class="form-label"
-                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">First
+                                        <label for="validationDefault06" class="form-label"
+                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500;">First
                                             Name</label>
-                                        <input
-                                                type="text"
-                                                name="firstName"
-                                                th:field="*{firstName}"
-                                                class="form-control"
-                                                id="validationDefault01"
-                                                placeholder="Enter First Name"
-                                                required
-                                        />
+                                        <input type="text" name="firstName" th:field="*{firstName}"
+                                               class="form-control" id="validationDefault06"
+                                               placeholder="Enter First Name" required/>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="validationDefault02" class="form-label"
+                                        <label for="validationDefault07" class="form-label"
                                                style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Last
                                             Name</label>
-                                        <input
-                                                type="text"
-                                                name="lastName"
-                                                th:field="*{lastName}"
-                                                class="form-control"
-                                                placeholder="Enter Last Name"
-                                                id="validationDefault02"
-                                                required
-                                        />
+                                        <input type="text" name="lastName" th:field="*{lastName}"
+                                               class="form-control" placeholder="Enter Last Name"
+                                               id="validationDefault07" required/>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="validationDefault03" class="form-label"
+                                        <label for="validationDefault08" class="form-label"
                                                style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Age</label>
-                                        <input
-                                                type="number"
-                                                name="age"
-                                                th:field="*{age}"
-                                                class="form-control"
-                                                placeholder="Enter Age"
-                                                id="validationDefault03"
-                                                required
-                                        />
+                                        <input type="text" name="age" th:field="*{age}" class="form-control"
+                                               placeholder="Enter Age" id="validationDefault08" required/>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="validationDefault04" class="form-label"
+                                        <label for="validationDefault09" class="form-label"
                                                style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Email</label>
-                                        <input
-                                                type="email"
-                                                name="email"
-                                                th:field="*{email}"
-                                                class="form-control"
-                                                placeholder="Enter Email"
-                                                id="validationDefault04"
-                                                required
-                                        />
+                                        <input type="email" name="email" th:field="*{email}" class="form-control"
+                                               placeholder="Enter Email" id="validationDefault09" required/>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="validationDefault05" class="form-label"
+                                        <label for="validationDefault10" class="form-label"
                                                style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Password</label>
-                                        <input
-                                                type="password"
-                                                name="password"
-                                                th:field="*{password}"
-                                                class="form-control"
-                                                placeholder="Enter Password"
-                                                id="validationDefault05"
-                                                required
-                                        />
+                                        <input type="password" name="password" th:field="*{password}"
+                                               class="form-control" placeholder="Enter Password"
+                                               id="validationDefault10" required/>
                                     </div>
+
                                     <div>
-                                        <label style="display: flex; justify-content: center; font-size: 18px; margin-bottom: 10px; font-weight: 500; margin-top: 8px;">Role</label>
+                                        <label
+                                                style="display: flex; justify-content: center; font-size: 18px; margin-bottom: 10px; font-weight: 500; margin-top: 8px;">Role</label>
                                         <select class="form-select" name="roles" th:field="*{roles}">
                                             <option th:value="ADMIN">ADMIN</option>
                                             <option th:value="USER">USER</option>
+
                                         </select>
                                     </div>
                                     <br>
                                     <div class="box-footer">
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-                                            <a th:href="@{/admin}"
-                                               class="btn btn-secondary me-md-2">Close</a>
+                                            <a th:href="@{/admin}" class="btn btn-secondary me-md-2">Close</a>
 
                                             <button type="submit" class="btn btn-success">
                                                 Add new user
@@ -141,59 +294,251 @@
                         </div>
                     </div>
                 </div>
-
             </div>
+
+        </div>
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"
+             style="min-height:100vh; padding: 10px 30px 30px 30px;"
+             tabindex="0">
+            <div class="title"
+                 style="font-size: 36px; font-weight: 600; background-color: #f9fafa; margin-bottom: 15px;">User
+                information-page
+            </div>
+            <div class="all_user"
+                 style="font-size: 24px; font-weight: 600; padding: 10px; border-color: #dee2e6;">About user
+            </div>
+            <table class="table caption-top table-bordered table-striped">
+                <!-- <caption><h2>All users</h2></caption> -->
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user: ${users}">
+                    <td class="align-middle" th:text="${user.getId()}">id</td>
+                    <td class="align-middle" th:text="${user.getFirstName()}">firstname</td>
+                    <td class="align-middle" th:text="${user.getLastName()}">lastName</td>
+                    <td class="align-middle" th:text="${user.getAge()}">age</td>
+                    <td class="align-middle" th:text="${user.getEmail()}">email</td>
+                    <td class="align-middle" th:text="${user.getRoles()}">role</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 
-<!-- Modal -->
-
-<div style="margin: 20px;">
-
-    <table class="table caption-top table-bordered table-striped">
-        <caption><h2>All users </h2></caption>
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Age</th>
-            <th scope="col">Email</th>
-            <th scope="col">Password</th>
-            <th scope="col">Role</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user: ${users}">
-            <td class="align-middle" th:text="${user.getId()}">id</td>
-            <td class="align-middle" th:text="${user.getFirstName()}">firstname</td>
-            <td class="align-middle" th:text="${user.getLastName()}">lastName</td>
-            <td class="align-middle" th:text="${user.getAge()}">age</td>
-            <td class="align-middle" th:text="${user.getEmail()}">email</td>
-            <td class="align-middle" th:text="${user.getPassword()}">password</td>
-            <td class="align-middle" th:text="${user.getRoles()}">role</td>
-            <td>
-                <a th:href="@{/admin/edit/{id}(id=${user.id})}" type="button" class="btn btn-primary">
-                    Edit
-                </a>
-
-            </td>
-            <td>
-                <a th:href="@{/admin/{id}(id=${user.id})}"
-                   class="btn btn-danger">Delete
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"-->
+<!--      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">-->
+
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <title>Table Users</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">-->
+<!--    <style>-->
+<!--        input[type="number"]::-webkit-outer-spin-button,-->
+<!--        input[type="number"]::-webkit-inner-spin-button {-->
+<!--            -webkit-appearance: none;-->
+<!--            margin: 0;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="text-bg-dark p-3 d-flex justify-content-between align-items-center">-->
+<!--    <div class="d-flex">-->
+<!--        <b style="padding-left: 8px;">Admin@mail.ru&ensp;</b>-->
+<!--&lt;!&ndash;        <span>with roles:&ensp;</span>&ndash;&gt;-->
+<!--&lt;!&ndash;        <span class="text-uppercase">admin user</span>&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div class="nav-item">-->
+<!--        <a class="btn btn-outline-secondary" th:href="@{/login}" type="button">Logout</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Button trigger modal &ndash;&gt;-->
+<!--<div style="margin: 20px;">-->
+<!--    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUser">-->
+<!--        Add user-->
+<!--    </button>-->
+<!--</div>-->
+
+<!--<div style="margin: 20px;">-->
+
+<!--    &lt;!&ndash; Modal &ndash;&gt;-->
+<!--    <div class="modal fade" id="addUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"-->
+<!--         aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog modal-dialog-centered">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title" id="exampleModalLabel">Add user</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal"-->
+<!--                            aria-label="Закрыть"></button>-->
+<!--                </div>-->
+
+<!--                <div class="modal-body">-->
+<!--                                <form th:action="@{/admin}" th:object="${user}" method="POST">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="validationDefault01" class="form-label"-->
+<!--                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">First-->
+<!--                                            Name</label>-->
+<!--                                        <input-->
+<!--                                                type="text"-->
+<!--                                                name="firstName"-->
+<!--                                                th:field="*{firstName}"-->
+<!--                                                class="form-control"-->
+<!--                                                id="validationDefault01"-->
+<!--                                                placeholder="Enter First Name"-->
+<!--                                                required-->
+<!--                                        />-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="validationDefault02" class="form-label"-->
+<!--                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Last-->
+<!--                                            Name</label>-->
+<!--                                        <input-->
+<!--                                                type="text"-->
+<!--                                                name="lastName"-->
+<!--                                                th:field="*{lastName}"-->
+<!--                                                class="form-control"-->
+<!--                                                placeholder="Enter Last Name"-->
+<!--                                                id="validationDefault02"-->
+<!--                                                required-->
+<!--                                        />-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="validationDefault03" class="form-label"-->
+<!--                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Age</label>-->
+<!--                                        <input-->
+<!--                                                type="number"-->
+<!--                                                name="age"-->
+<!--                                                th:field="*{age}"-->
+<!--                                                class="form-control"-->
+<!--                                                placeholder="Enter Age"-->
+<!--                                                id="validationDefault03"-->
+<!--                                                required-->
+<!--                                        />-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="validationDefault04" class="form-label"-->
+<!--                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Email</label>-->
+<!--                                        <input-->
+<!--                                                type="email"-->
+<!--                                                name="email"-->
+<!--                                                th:field="*{email}"-->
+<!--                                                class="form-control"-->
+<!--                                                placeholder="Enter Email"-->
+<!--                                                id="validationDefault04"-->
+<!--                                                required-->
+<!--                                        />-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="validationDefault05" class="form-label"-->
+<!--                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Password</label>-->
+<!--                                        <input-->
+<!--                                                type="password"-->
+<!--                                                name="password"-->
+<!--                                                th:field="*{password}"-->
+<!--                                                class="form-control"-->
+<!--                                                placeholder="Enter Password"-->
+<!--                                                id="validationDefault05"-->
+<!--                                                required-->
+<!--                                        />-->
+<!--                                    </div>-->
+<!--                                    <div>-->
+<!--                                        <label style="display: flex; justify-content: center; font-size: 18px; margin-bottom: 10px; font-weight: 500; margin-top: 8px;">Role</label>-->
+<!--                                        <select class="form-select" name="roles" th:field="*{roles}">-->
+<!--                                            <option th:value="ADMIN">ADMIN</option>-->
+<!--                                            <option th:value="USER">USER</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                    <br>-->
+<!--                                    <div class="box-footer">-->
+<!--                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">-->
+
+<!--                                            <a th:href="@{/admin}"-->
+<!--                                               class="btn btn-secondary me-md-2">Close</a>-->
+
+<!--                                            <button type="submit" class="btn btn-success">-->
+<!--                                                Add new user-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </form>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Modal &ndash;&gt;-->
+
+<!--<div style="margin: 20px;">-->
+
+<!--    <table class="table caption-top table-bordered table-striped">-->
+<!--        <caption><h2>All users </h2></caption>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th scope="col">ID</th>-->
+<!--            <th scope="col">First Name</th>-->
+<!--            <th scope="col">Last Name</th>-->
+<!--            <th scope="col">Age</th>-->
+<!--            <th scope="col">Email</th>-->
+<!--            <th scope="col">Password</th>-->
+<!--            <th scope="col">Role</th>-->
+<!--            <th scope="col">Edit</th>-->
+<!--            <th scope="col">Delete</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="user: ${users}">-->
+<!--            <td class="align-middle" th:text="${user.getId()}">id</td>-->
+<!--            <td class="align-middle" th:text="${user.getFirstName()}">firstname</td>-->
+<!--            <td class="align-middle" th:text="${user.getLastName()}">lastName</td>-->
+<!--            <td class="align-middle" th:text="${user.getAge()}">age</td>-->
+<!--            <td class="align-middle" th:text="${user.getEmail()}">email</td>-->
+<!--            <td class="align-middle" th:text="${user.getPassword()}">password</td>-->
+<!--            <td class="align-middle" th:text="${user.getRoles()}">role</td>-->
+<!--            <td>-->
+<!--                <a th:href="@{/admin/edit/{id}(id=${user.id})}" type="button" class="btn btn-primary">-->
+<!--                    Edit-->
+<!--                </a>-->
+
+<!--            </td>-->
+<!--            <td>-->
+<!--                <a th:href="@{/admin/{id}(id=${user.id})}"-->
+<!--                   class="btn btn-danger">Delete-->
+<!--                </a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--</body>-->
+<!--</html>-->
 
