@@ -26,6 +26,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException(String.format("Пользователь с email %s не найден", email)));
+    }
+
+    @Override
     public User updateUser(User user, Long id) {
         User updateUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Пользователь с id %s не найден", id)));
         if (user.getFirstName() != null) {

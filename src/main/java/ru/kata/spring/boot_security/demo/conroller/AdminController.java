@@ -18,6 +18,8 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 public class AdminController {
     private final UserService userService;
 
+    public static String mail;
+
     @PostMapping("/admin")
     public String addUser(@ModelAttribute("user") User user) {
         userService.addUser(user);
@@ -27,6 +29,7 @@ public class AdminController {
     @GetMapping("/admin")
     public String getAllUsers(Model model) {
         model.addAttribute("users", userService.listUsers());
+        model.addAttribute("useremail", userService.getUserByEmail(mail));
         model.addAttribute("user", new User());
         return "index";
     }
@@ -48,5 +51,6 @@ public class AdminController {
         userService.updateUser(user, id);
         return "redirect:/admin";
     }
+
 }
 

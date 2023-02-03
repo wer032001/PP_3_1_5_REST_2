@@ -13,9 +13,9 @@
 <body>
 <div class="text-bg-dark p-3 d-flex justify-content-between align-items-center">
     <div class="d-flex">
-        <b>Admin@mailru&ensp;</b>
-        <span>with roles:&ensp;</span>
-        <span class="text-uppercase">admin user</span>
+        <b th:object="${user}" th:text="${user.email}"></b>
+        <span>&ensp;with roles:&ensp;</span>
+        <span th:object="${user}" th:text="${user.roles.stream().findFirst().get()}"></span>
     </div>
     <div class="nav-item">
         <a class="btn btn-outline-secondary" th:href="@{/login}" type="button">Logout</a>
@@ -65,7 +65,6 @@
                 About user
             </div>
             <table class="table caption-top table-bordered table-striped">
-                <!-- <caption><h2>All users</h2></caption> -->
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -83,7 +82,7 @@
                     <td class="align-middle" th:text="${user.getLastName()}">lastName</td>
                     <td class="align-middle" th:text="${user.getAge()}">age</td>
                     <td class="align-middle" th:text="${user.getEmail()}">email</td>
-                    <td class="align-middle" th:text="${user.getRoles()}">role</td>
+                    <td class="align-middle" th:text="${user.getRoles().stream().findFirst().get()}">role</td>
                 </tr>
                 </tbody>
             </table>
@@ -91,73 +90,8 @@
     </div>
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 </body>
-
 </html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"-->
-<!--      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">-->
-
-<!--<head>-->
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <title>Table Users</title>-->
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"-->
-<!--          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">-->
-<!--</head>-->
-
-<!--<body>-->
-<!--<div class="text-bg-dark p-3 d-flex justify-content-between align-items-center">-->
-<!--    <div class="d-flex">-->
-<!--        <b style="padding-left: 16px;">User@mail.ru&ensp;</b>-->
-<!--        &lt;!&ndash;        <span>with roles:&ensp;</span>&ndash;&gt;-->
-<!--        &lt;!&ndash;        <span class="text-uppercase">admin user</span>&ndash;&gt;-->
-<!--    </div>-->
-<!--    <div class="nav-item">-->
-<!--        <a class="btn btn-outline-secondary" th:href="@{/login}" type="button">Logout</a>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div class="col-12 p-0" style="padding: 20px; background-color:#F9FAFA;">-->
-<!--    <div class="right_side" style="min-height:100vh; padding: 10px 30px 30px 30px;" tabindex="0">-->
-<!--        <div class="title"-->
-<!--             style="font-size: 36px; font-weight: 600; background-color: #f9fafa; margin-bottom: 5px;">User-->
-<!--            information-page-->
-<!--        </div>-->
-<!--        <div class="all_user" style="font-size: 24px; font-weight: 600; padding: 0px 10px 10px 0px; border-color: #dee2e6;">-->
-<!--            About user-->
-<!--        </div>-->
-<!--        <table class="table caption-top table-bordered table-striped">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th scope="col">ID</th>-->
-<!--                <th scope="col">First Name</th>-->
-<!--                <th scope="col">Last Name</th>-->
-<!--                <th scope="col">Age</th>-->
-<!--                <th scope="col">Email</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--            <tr th:object="${user}">-->
-<!--                <td class="align-middle" th:text="${user.getId()}">id</td>-->
-<!--                <td class="align-middle" th:text="${user.getFirstName()}">firstname</td>-->
-<!--                <td class="align-middle" th:text="${user.getLastName()}">lastName</td>-->
-<!--                <td class="align-middle" th:text="${user.getAge()}">age</td>-->
-<!--                <td class="align-middle" th:text="${user.getEmail()}">email</td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
-<!--    </div>-->
-<!--</div>-->
-
-
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"-->
-<!--        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--</body>-->
-<!--</html>-->
