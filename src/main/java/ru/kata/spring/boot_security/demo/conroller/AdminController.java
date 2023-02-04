@@ -5,12 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpRequest;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,7 +21,7 @@ public class AdminController {
     public static String mail;
 
     @PostMapping("/admin")
-    public String addUser(@ModelAttribute("user") User user) {
+    public String addUser(@ModelAttribute("user") User user, HttpServletRequest httpServletRequest) {
         userService.addUser(user);
         return "redirect:/admin";
     }
@@ -51,6 +51,10 @@ public class AdminController {
         userService.updateUser(user, id);
         return "redirect:/admin";
     }
-
+    @GetMapping("/getOne")
+    @ResponseBody
+    public User getOne(Long id) {
+        return userService.getUserById(id);
+    }
 }
 
