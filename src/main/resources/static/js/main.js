@@ -8,7 +8,7 @@ $(document).ready(function() {
         event.preventDefault();
         var href = $(this).attr('href');
 
-        $.get(href, function(user, status) {
+        $.get(href, function(user) {
             $('.myForm #id').val(user.id);
             $('.myForm #firstName').val(user.firstName);
             $('.myForm #lastName').val(user.lastName);
@@ -17,6 +17,5 @@ $(document).ready(function() {
             $('.myForm #password').val(user.password);
             $('.myForm #roles').val(user.roles);
         });
-        // $('.myForm #exampleModal').modal;
     });
 });

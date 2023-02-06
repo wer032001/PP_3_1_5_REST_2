@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.service;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.entity.User;
@@ -30,29 +29,6 @@ public class UserServiceImp implements UserService {
         return userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException(String.format("Пользователь с email %s не найден", email)));
     }
 
-    @Override
-    public User updateUser(User user, Long id) {
-        User updateUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Пользователь с id %s не найден", id)));
-        if (user.getFirstName() != null) {
-         updateUser.setFirstName(user.getFirstName());
-        }
-        if (user.getLastName() != null) {
-            updateUser.setLastName(user.getLastName());
-        }
-        if (user.getAge() != 0) {
-            updateUser.setAge(user.getAge());
-        }
-        if (user.getEmail() != null) {
-            updateUser.setEmail(user.getEmail());
-        }
-        if (user.getPassword() != null) {
-            updateUser.setEmail(user.getEmail());
-        }
-        if (user.getRoles() != null) {
-            updateUser.setRoles(user.getRoles());
-        }
-        return userRepository.save(updateUser);
-    }
     @Override
     public List<User> listUsers() {
         return userRepository.findAll();

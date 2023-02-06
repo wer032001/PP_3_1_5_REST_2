@@ -151,14 +151,14 @@
                                                        style="display: flex; justify-content: center; font-size: 18px; font-weight: 500;">Last
                                                     Name</label>
                                                 <input type="text" class="form-control" name="lastName" id="lastName"
-                                                       placeholder="Enter Last Name"/>
+                                                       placeholder="Enter Last Name" required/>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="age" class="form-label"
                                                        style="display: flex; justify-content: center; font-size: 18px; font-weight: 500;">Age</label>
                                                 <input type="number" class="form-control" name="age" id="age"
-                                                       placeholder="Enter Age"/>
+                                                       placeholder="Enter Age" required/>
                                             </div>
 
                                             <div class="form-group">
@@ -166,8 +166,8 @@
                                                        style="display: flex; justify-content: center; font-size: 18px; font-weight: 500;">Email</label>
                                                 <div class="input-group">
                                                 <div class="input-group-text">@</div>
-                                                <input type="text" class="form-control" name="email" id="email"
-                                                       placeholder="Enter Email"/>
+                                                <input type="email" class="form-control" name="email" id="email"
+                                                       placeholder="Enter Email" required/>
                                                 </div>
                                             </div>
 
@@ -268,10 +268,7 @@
                                 </div>
                                 <br>
                                 <div class="box-footer">
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-
-                                        <a th:href="@{/admin}" class="btn btn-secondary me-md-2">Close</a>
-
+                                    <div class="d-grid gap-2 d-md-flex justify-content-center">
                                         <button type="submit" class="btn btn-success">
                                             Add new user
                                         </button>
@@ -282,7 +279,6 @@
                     </div>
                 </div>
             </div>
-
 
         </div>
         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"
