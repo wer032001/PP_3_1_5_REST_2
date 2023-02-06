@@ -70,4 +70,18 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return active;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+               "id=" + id +
+               ", firstName='" + firstName + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", age=" + age +
+               ", email='" + email + '\'' +
+               ", password='" + password + '\'' +
+               ", active=" + active +
+               ", roles=" + roles +
+               '}';
+    }
 }
