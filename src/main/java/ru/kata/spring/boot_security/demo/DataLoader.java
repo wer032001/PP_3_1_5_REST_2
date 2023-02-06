@@ -18,9 +18,9 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        userRepository.save(new User(Long.valueOf(1), "Ivan", "Ivanov", 23, "admin@mail.ru", "admin", true, Set.of(Role.ADMIN)));
-        userRepository.save(new User(Long.valueOf(2), "Marina", "Sidorova", 19, "user@mail.ru", "user", true, Set.of(Role.USER)));
+    public void run(String... args) {
+        userRepository.save(new User(1L, "Ivan", "Ivanov", 23, "admin@mail.ru", "admin", true, Set.of(Role.ADMIN)));
+        userRepository.save(new User(2L, "Marina", "Sidorova", 19, "user@mail.ru", "user", true, Set.of(Role.USER)));
     }
 }
 
