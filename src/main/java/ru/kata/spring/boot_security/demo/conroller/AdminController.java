@@ -37,18 +37,6 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-//    @GetMapping("/admin/edit/{id}")
-//    public String updateUserForm(@PathVariable Long id, Model model) {
-//        model.addAttribute("user", userService.getUserById(id));
-//        return "updateuser";
-//    }
-
-
-//    @PostMapping("/admin/{id}")
-//    public String updateUser(@PathVariable Long id, @ModelAttribute("user") User user) {
-//        userService.updateUser(user, id);
-//        return "redirect:/admin";
-//    }
     @GetMapping("/admin/getOne")
     @ResponseBody
     public User getOne(Long id) {
