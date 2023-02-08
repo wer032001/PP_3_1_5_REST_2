@@ -18,7 +18,7 @@
              style="margin-top: 100px; padding: 10px; border: 2px solid #d2d4d4;">
             <div class="text-center" style="font-size: 24px; padding-top: 10px; font-weight: 600;">Edit user</div>
             <div class="card-body" style="padding-top: 10px">
-                <form th:action="@{/admin/{id} (id=${user.id})}" th:object="${user}" method="POST">
+                <form th:action="@{/admin (id=${user.id})}" th:object="${user}" method="POST">
                     <div class="form-group">
                         <label for="validationDefault01" class="form-label"
                                style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">First
@@ -74,42 +74,38 @@
                         />
                     </div>
                     <div class="form-group">
-                        <label class="form-label"
+                        <label for="validationDefault05" class="form-label"
                                style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Password</label>
                         <input
-                                type="password"
+                                type="text"
                                 name="password"
                                 th:field="*{password}"
                                 class="form-control"
                                 placeholder="Enter Password"
+                                id="validationDefault05"
+                                required
                         />
                     </div>
                     <div>
                         <label class="form-label"
                                style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Role</label>
-                        <select class="form-select" name="roles" th:field="*{roles}">
-                            <option th:value="ADMIN">ADMIN</option>
-                            <option th:value="USER">USER</option>
+                        <select class="form-select" name="role">
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="USER">USER</option>
                         </select>
                     </div>
                     <br>
                     <div class="box-footer">
-
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-
                             <a th:href="@{/admin}"
                                class="btn btn-secondary me-md-2">Close</a>
-
                             <button type="submit" class="btn btn-primary">
                                 Edit
                             </button>
-
                         </div>
-
                     </div>
+
                 </form>
-
-
             </div>
         </div>
     </div>
