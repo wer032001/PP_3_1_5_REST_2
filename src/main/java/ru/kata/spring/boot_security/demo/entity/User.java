@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -36,12 +37,12 @@ public class User implements UserDetails {
     private String password;
 
     private boolean active = true;
-@Nullable
+    @Nullable
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_role",
-                joinColumns = @JoinColumn(name = "role_id"),
-                inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<Role> roles;
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<Role> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -14,6 +14,8 @@ import java.util.List;
 public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleService roleService;
+
 
     @Override
     public void addUser(User user) {
@@ -26,10 +28,11 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User updateUser(User user, Long id) {
+    public User updateUser(User user, Long id, String roles) {
         User updateUser = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Пользователь с id %s не найден", id)));
+
         if (user.getFirstName() != null) {
-         updateUser.setFirstName(user.getFirstName());
+            updateUser.setFirstName(user.getFirstName());
         }
         if (user.getLastName() != null) {
             updateUser.setLastName(user.getLastName());
@@ -41,13 +44,15 @@ public class UserServiceImp implements UserService {
             updateUser.setEmail(user.getEmail());
         }
         if (user.getPassword() != null) {
-            updateUser.setEmail(user.getEmail());
+            updateUser.setPassword(user.getPassword());
         }
-        if (user.getRoles() != null) {
-            updateUser.setRoles(user.getRoles());
+        if (roles != null) {
+            updateUser.getRoles().remove(roleService.getRole(updateUser.getRoles().stream().findFirst().get().getName()));
+            updateUser.getRoles().add(roleService.getRole(roles));
         }
         return userRepository.save(updateUser);
     }
+
     @Override
     public List<User> listUsers() {
         return userRepository.findAll();

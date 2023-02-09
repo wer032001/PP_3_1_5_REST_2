@@ -18,7 +18,7 @@
              style="margin-top: 100px; padding: 10px; border: 2px solid #d2d4d4;">
             <div class="text-center" style="font-size: 24px; padding-top: 10px; font-weight: 600;">Edit user</div>
             <div class="card-body" style="padding-top: 10px">
-                <form th:action="@{/admin (id=${user.id})}" th:object="${user}" method="POST">
+                <form th:method="PATCH" th:action="@{/admin/{id} (id=${user.getId()})}" th:object="${user}">
                     <div class="form-group">
                         <label for="validationDefault01" class="form-label"
                                style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">First

@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import ru.kata.spring.boot_security.demo.security.UserDetailsServiceImp;
+import ru.kata.spring.boot_security.demo.service.UserDetailsServiceImp;
 
 @Configuration
 @EnableWebSecurity
@@ -15,7 +15,7 @@ import ru.kata.spring.boot_security.demo.security.UserDetailsServiceImp;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
 
-   private final UserDetailsServiceImp userDetailsServiceImp;
+    private final UserDetailsServiceImp userDetailsServiceImp;
 
     public WebSecurityConfig(SuccessUserHandler successUserHandler, UserDetailsServiceImp userDetailsServiceImp) {
         this.successUserHandler = successUserHandler;
@@ -36,6 +36,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-      auth.userDetailsService(userDetailsServiceImp).passwordEncoder(NoOpPasswordEncoder.getInstance());
+        auth.userDetailsService(userDetailsServiceImp).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 }

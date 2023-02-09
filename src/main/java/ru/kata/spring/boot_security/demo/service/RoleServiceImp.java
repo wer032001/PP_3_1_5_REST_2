@@ -7,9 +7,10 @@ import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 
 @Service
 @RequiredArgsConstructor
-public class RoleServiceImp {
+public class RoleServiceImp implements RoleService {
     private final RoleRepository roleRepository;
 
+    @Override
     public Role getRole(String name) {
         return roleRepository.findByName(name).get();
     }

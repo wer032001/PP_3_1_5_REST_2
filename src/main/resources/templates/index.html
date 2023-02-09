@@ -40,104 +40,104 @@
                 </div>
 
                 <div class="modal-body">
-                                <form th:action="@{/admin}" th:object="${user}" method="POST">
-                                    <div class="form-group">
-                                        <label for="validationDefault01" class="form-label"
-                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">First
-                                            Name</label>
-                                        <input
-                                                type="text"
-                                                name="firstName"
-                                                th:field="*{firstName}"
-                                                class="form-control"
-                                                id="validationDefault01"
-                                                placeholder="Enter First Name"
-                                                required
-                                        />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="validationDefault02" class="form-label"
-                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Last
-                                            Name</label>
-                                        <input
-                                                type="text"
-                                                name="lastName"
-                                                th:field="*{lastName}"
-                                                class="form-control"
-                                                placeholder="Enter Last Name"
-                                                id="validationDefault02"
-                                                required
-                                        />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="validationDefault03" class="form-label"
-                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Age</label>
-                                        <input
-                                                type="number"
-                                                name="age"
-                                                th:field="*{age}"
-                                                class="form-control"
-                                                placeholder="Enter Age"
-                                                id="validationDefault03"
-                                                required
-                                        />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="validationDefault04" class="form-label"
-                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Email</label>
-                                        <input
-                                                type="email"
-                                                name="email"
-                                                th:field="*{email}"
-                                                class="form-control"
-                                                placeholder="Enter Email"
-                                                id="validationDefault04"
-                                                required
-                                        />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="validationDefault05" class="form-label"
-                                               style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Password</label>
-                                        <input
-                                                type="text"
-                                                name="password"
-                                                th:field="*{password}"
-                                                class="form-control"
-                                                placeholder="Enter Password"
-                                                id="validationDefault05"
-                                                required
-                                        />
-                                    </div>
+                    <form th:action="@{/admin}" th:object="${user}" method="POST">
+                        <div class="form-group">
+                            <label for="validationDefault01" class="form-label"
+                                   style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">First
+                                Name</label>
+                            <input
+                                    type="text"
+                                    name="firstName"
+                                    th:field="*{firstName}"
+                                    class="form-control"
+                                    id="validationDefault01"
+                                    placeholder="Enter First Name"
+                                    required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="validationDefault02" class="form-label"
+                                   style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Last
+                                Name</label>
+                            <input
+                                    type="text"
+                                    name="lastName"
+                                    th:field="*{lastName}"
+                                    class="form-control"
+                                    placeholder="Enter Last Name"
+                                    id="validationDefault02"
+                                    required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="validationDefault03" class="form-label"
+                                   style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Age</label>
+                            <input
+                                    type="number"
+                                    name="age"
+                                    th:field="*{age}"
+                                    class="form-control"
+                                    placeholder="Enter Age"
+                                    id="validationDefault03"
+                                    required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="validationDefault04" class="form-label"
+                                   style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Email</label>
+                            <input
+                                    type="email"
+                                    name="email"
+                                    th:field="*{email}"
+                                    class="form-control"
+                                    placeholder="Enter Email"
+                                    id="validationDefault04"
+                                    required
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="validationDefault05" class="form-label"
+                                   style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Password</label>
+                            <input
+                                    type="text"
+                                    name="password"
+                                    th:field="*{password}"
+                                    class="form-control"
+                                    placeholder="Enter Password"
+                                    id="validationDefault05"
+                                    required
+                            />
+                        </div>
 
-                                    <div class="form-group">
-                                        <label style="display: flex; justify-content: center; font-size: 18px; margin-bottom: 10px; font-weight: 500; margin-top: 8px;">Role</label>
-                                        <select class="form-select" name="role">
-                                            <option value="ADMIN">ADMIN</option>
-                                            <option value="USER">USER</option>
-                                        </select>
-                                    </div>
+                        <div class="form-group">
+                            <label style="display: flex; justify-content: center; font-size: 18px; margin-bottom: 10px; font-weight: 500; margin-top: 8px;">Role</label>
+                            <select class="form-select" name="role">
+                                <option value="ADMIN">ADMIN</option>
+                                <option value="USER">USER</option>
+                            </select>
+                        </div>
 
-                                    <br>
-                                    <div class="box-footer">
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <br>
+                        <div class="box-footer">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-                                            <a th:href="@{/admin}"
-                                               class="btn btn-secondary me-md-2">Close</a>
+                                <a th:href="@{/admin}"
+                                   class="btn btn-secondary me-md-2">Close</a>
 
-                                            <button type="submit" class="btn btn-success">
-                                                Add new user
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+                                <button type="submit" class="btn btn-success">
+                                    Add new user
+                                </button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
-
             </div>
         </div>
     </div>
+
+</div>
+</div>
+</div>
 </div>
 
 
@@ -174,9 +174,9 @@
 
             </td>
             <td>
-                <a th:href="@{/admin/{id}(id=${user.id})}"
-                   class="btn btn-danger">Delete
-                </a>
+                <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">
+                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                </form>
             </td>
         </tr>
         </tbody>
