@@ -51,5 +51,6 @@ public class AdminController {
         userService.updateUser(user, user.getId(), editRole);
         return "redirect:/admin";
     }
+
 }
 
