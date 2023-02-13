@@ -16,7 +16,7 @@
 <body>
 <div class="text-bg-dark p-3 d-flex justify-content-between align-items-center">
     <div class="d-flex">
-        <b th:object="${useremail}" th:text="${useremail.email}"></b>
+        <b th:object="${useremail}" th:text="${useremail.email.toUpperCase()}"></b>
         <span>&ensp;with roles:&ensp;</span>
         <span th:object="${useremail}" th:text="${useremail.toString()}"></span>
         <span>&ensp;USER&ensp;</span>

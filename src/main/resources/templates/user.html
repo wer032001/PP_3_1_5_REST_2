@@ -13,9 +13,9 @@
 <body>
 <div class="text-bg-dark p-3 d-flex justify-content-between align-items-center">
     <div class="d-flex">
-        <b th:object="${user}" th:text="${user.email}"></b>
+        <b th:object="${user}" th:text="${user.email.toUpperCase()}"></b>
         <span>&ensp;with roles:&ensp;</span>
-        <span th:object="${user}" th:text="${user.roles.stream().findFirst().get()}"></span>
+        <span th:object="${user}" th:text="${user.toString()}"></span>
     </div>
     <div class="nav-item">
         <a class="btn btn-outline-secondary" th:href="@{/login}" type="button">Logout</a>
@@ -82,7 +82,7 @@
                     <td class="align-middle" th:text="${user.getLastName()}">lastName</td>
                     <td class="align-middle" th:text="${user.getAge()}">age</td>
                     <td class="align-middle" th:text="${user.getEmail()}">email</td>
-                    <td class="align-middle" th:text="${user.getRoles().stream().findFirst().get()}">role</td>
+                    <td class="align-middle" th:text="${user.toString()}">role</td>
                 </tr>
                 </tbody>
             </table>
