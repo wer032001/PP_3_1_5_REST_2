@@ -1,11 +1,11 @@
 package ru.kata.spring.boot_security.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -37,7 +37,8 @@ public class User implements UserDetails {
     private String password;
 
     private boolean active = true;
-    @Nullable
+
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "role_id"),
@@ -78,4 +79,5 @@ public class User implements UserDetails {
     public String toString() {
         return roles.stream().findFirst().get().getName();
     }
+
 }
