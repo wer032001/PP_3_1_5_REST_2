@@ -14,4 +14,6 @@ public interface UserService {
     List<User> listUsers();
 
     void removeUser(Long id);
+
+    User updateUser(User user, Long id, String roles);
 }

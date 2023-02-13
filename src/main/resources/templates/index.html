@@ -111,7 +111,7 @@
                             <td class="align-middle" th:text="${user.getEmail()}">email</td>
                             <td class="align-middle" th:text="${user.getPassword()}">password</td>
                             <td class="align-middle" th:text="${user.toString()}">role</td>
-                            <td><a th:href="@{/admin/getOne/(id=${user.id})}" class="btn btn-primary eBtn"
+                            <td><a th:href="@{/admin/getOne/(id=${user.getId()})}" class="btn btn-primary eBtn"
                                    data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a></td>
                             <td>
                                 <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.id})}">
@@ -124,7 +124,7 @@
 
                     <!-- Модальное окно -->
                     <div class="myForm">
-                        <form th:action="@{/admin}" th:object="${user}" method="POST">
+                        <form th:method="PATCH" th:action="@{/admin}" th:object="${user}">
                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -169,28 +169,27 @@
                                                 <label for="email" class="form-label"
                                                        style="display: flex; justify-content: center; font-size: 18px; font-weight: 500;">Email</label>
                                                 <div class="input-group">
-                                                <div class="input-group-text">@</div>
-                                                <input type="email" class="form-control" name="email" id="email"
-                                                       placeholder="Enter Email" required/>
+                                                    <div class="input-group-text">@</div>
+                                                    <input type="email" class="form-control" name="email" id="email"
+                                                           placeholder="Enter Email" required/>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="password" class="form-label"
                                                        style="display: flex; justify-content: center; font-size: 18px; font-weight: 500;">Password</label>
-                                                <input type="password" class="form-control" name="password" id="password"
+                                                <input type="password" class="form-control" name="password"
+                                                       id="password"
                                                        placeholder="Enter Password" readonly/>
                                             </div>
 
-                                            <div>
-                                                <label for="roles"
-                                                       style="display: flex; justify-content: center; font-size: 18px; margin-bottom: 10px; font-weight: 500; margin-top: 8px;">Role</label>
-                                                <select class="form-select" name="roles" id="roles">
+                                            <div class="form-group">
+                                                <label style="display: flex; justify-content: center; font-size: 18px; margin-bottom: 10px; font-weight: 500; margin-top: 8px;">Role</label>
+                                                <select class="form-select" name="editRole">
                                                     <option value="ADMIN">ADMIN</option>
                                                     <option value="USER">USER</option>
                                                 </select>
                                             </div>
-
                                             <br>
                                             <div class="box-footer">
                                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -248,8 +247,8 @@
                                            style="display: flex; justify-content: center; font-size: 18px; font-weight: 500; margin-top: 8px;">Email</label>
                                     <div class="input-group">
                                         <div class="input-group-text">@</div>
-                                    <input type="email" name="email" th:field="*{email}" class="form-control"
-                                           placeholder="Enter Email" id="validationDefault09" required/>
+                                        <input type="email" name="email" th:field="*{email}" class="form-control"
+                                               placeholder="Enter Email" id="validationDefault09" required/>
                                     </div>
                                 </div>
 
@@ -260,14 +259,15 @@
                                            class="form-control" placeholder="Enter Password"
                                            id="validationDefault10" required/>
                                 </div>
+
                                 <div>
-                                                <label for="role"
-                                                       style="display: flex; justify-content: center; font-size: 18px; margin-bottom: 10px; font-weight: 500; margin-top: 8px;">Role</label>
-                                                <select class="form-select" name="role" id="role">
-                                                    <option value="ADMIN">ADMIN</option>
-                                                    <option value="USER">USER</option>
-                                                </select>
-                                            </div>
+                                    <label for="role"
+                                           style="display: flex; justify-content: center; font-size: 18px; margin-bottom: 10px; font-weight: 500; margin-top: 8px;">Role</label>
+                                    <select class="form-select" name="role" id="role">
+                                        <option value="ADMIN">ADMIN</option>
+                                        <option value="USER">USER</option>
+                                    </select>
+                                </div>
                                 <br>
                                 <div class="box-footer">
                                     <div class="d-grid gap-2 d-md-flex justify-content-center">
