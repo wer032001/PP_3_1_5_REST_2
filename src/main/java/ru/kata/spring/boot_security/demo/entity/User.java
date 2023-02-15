@@ -38,11 +38,10 @@ public class User implements UserDetails {
 
     private boolean active = true;
 
-    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     @Override
@@ -75,9 +74,12 @@ public class User implements UserDetails {
         return active;
     }
 
-    @Override
-    public String toString() {
-        return roles.stream().findFirst().get().getName();
+    public String getStringRoles(){
+        if(roles.size() >= 2) {
+            String user = roles.stream().filter(roleUser -> roleUser.getName().equals("USER")).findFirst().get().getName();
+            String admin = roles.stream().filter(roleAdmin -> roleAdmin.getName().equals("ADMIN")).findFirst().get().getName();
+            return user + " " + admin;
+        }
+      return roles.stream().findFirst().get().getName();
     }
-
 }

@@ -18,12 +18,10 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-        User user = (User) authentication.getPrincipal();
         if (roles.contains("ADMIN")) {
-            AdminController.mail = user.getEmail();
             httpServletResponse.sendRedirect("/admin");
         } else {
-            httpServletResponse.sendRedirect("/user/" + user.getEmail());
+            httpServletResponse.sendRedirect("/user");
         }
     }
 }

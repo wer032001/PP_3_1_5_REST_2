@@ -15,7 +15,7 @@
     <div class="d-flex">
         <b th:object="${user}" th:text="${user.email.toUpperCase()}"></b>
         <span>&ensp;with roles:&ensp;</span>
-        <span th:object="${user}" th:text="${user.toString()}"></span>
+        <span th:object="${user}" th:text="${user.getStringRoles()}"></span>
     </div>
     <div class="nav-item">
         <a class="btn btn-outline-secondary" th:href="@{/login}" type="button">Logout</a>
@@ -82,7 +82,7 @@
                     <td class="align-middle" th:text="${user.getLastName()}">lastName</td>
                     <td class="align-middle" th:text="${user.getAge()}">age</td>
                     <td class="align-middle" th:text="${user.getEmail()}">email</td>
-                    <td class="align-middle" th:text="${user.toString()}">role</td>
+                    <td class="align-middle" th:text="${user.getStringRoles()}">role</td>
                 </tr>
                 </tbody>
             </table>

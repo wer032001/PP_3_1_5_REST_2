@@ -18,8 +18,7 @@
     <div class="d-flex">
         <b th:object="${useremail}" th:text="${useremail.email.toUpperCase()}"></b>
         <span>&ensp;with roles:&ensp;</span>
-        <span th:object="${useremail}" th:text="${useremail.toString()}"></span>
-        <span>&ensp;USER&ensp;</span>
+        <span th:object="${useremail}" th:text="${useremail.getStringRoles()}"></span>
     </div>
     <div class="nav-item">
         <a class="btn btn-outline-secondary" th:href="@{/login}" type="button">Logout</a>
@@ -96,7 +95,6 @@
                             <th scope="col">Last Name</th>
                             <th scope="col">Age</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Password</th>
                             <th scope="col">Role</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
@@ -109,8 +107,7 @@
                             <td class="align-middle" th:text="${user.getLastName()}">lastName</td>
                             <td class="align-middle" th:text="${user.getAge()}">age</td>
                             <td class="align-middle" th:text="${user.getEmail()}">email</td>
-                            <td class="align-middle" th:text="${user.getPassword()}">password</td>
-                            <td class="align-middle" th:text="${user.toString()}">role</td>
+                            <td class="align-middle" th:text="${user.getStringRoles()}">role</td>
                             <td><a th:href="@{/admin/getOne/(id=${user.getId()})}" class="btn btn-primary eBtn"
                                    data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a></td>
                             <td>
@@ -266,6 +263,7 @@
                                     <select class="form-select" name="role" id="role">
                                         <option value="ADMIN">ADMIN</option>
                                         <option value="USER">USER</option>
+                                        <option value="ADMIN,USER">ADMIN USER</option>
                                     </select>
                                 </div>
                                 <br>
@@ -311,7 +309,7 @@
                     <td class="align-middle" th:text="${useremail.getLastName()}">lastName</td>
                     <td class="align-middle" th:text="${useremail.getAge()}">age</td>
                     <td class="align-middle" th:text="${useremail.getEmail()}">email</td>
-                    <td class="align-middle" th:text="${useremail.toString()}">role</td>
+                    <td class="align-middle" th:text="${useremail.getStringRoles()}">role</td>
                 </tr>
                 </tbody>
             </table>

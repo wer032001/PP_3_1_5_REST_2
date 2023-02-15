@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
@@ -8,6 +9,7 @@ import ru.kata.spring.boot_security.demo.repository.UserRepository;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -16,9 +18,17 @@ public class UserServiceImp implements UserService {
     private final UserRepository userRepository;
     private final RoleService roleService;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
-    public void addUser(User user) {
-        userRepository.save(user);
+    public void addUser(User user, String roles) {
+        if(roles.equals("ADMIN,USER")) {
+            user.setRoles(Set.of(roleService.getRole("ADMIN"),roleService.getRole("USER")));
+        } else {
+            user.setRoles(Set.of(roleService.getRole(roles)));
+        }
+        String encode = passwordEncoder.encode(user.getPassword());
+        userRepository.save(user.setPassword(encode));
     }
 
     @Override
