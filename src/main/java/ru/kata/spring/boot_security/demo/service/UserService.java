@@ -15,5 +15,5 @@ public interface UserService {
 
     void removeUser(Long id);
 
-    User updateUser(User user, Long id, String roles);
+    void updateUser(User user, Long id, String roles);
 }

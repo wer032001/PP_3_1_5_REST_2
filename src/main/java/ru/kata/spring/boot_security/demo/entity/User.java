@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -74,12 +73,12 @@ public class User implements UserDetails {
         return active;
     }
 
-    public String getStringRoles(){
-        if(roles.size() >= 2) {
+    public String getStringRoles() {
+        if (roles.size() >= 2) {
             String user = roles.stream().filter(roleUser -> roleUser.getName().equals("USER")).findFirst().get().getName();
             String admin = roles.stream().filter(roleAdmin -> roleAdmin.getName().equals("ADMIN")).findFirst().get().getName();
-            return user + " " + admin;
+            return admin + " " + user;
         }
-      return roles.stream().findFirst().get().getName();
+        return roles.stream().findFirst().get().getName();
     }
 }

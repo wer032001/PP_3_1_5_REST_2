@@ -3,15 +3,11 @@ package ru.kata.spring.boot_security.demo.conroller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.entity.User;
-import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
-
-import java.util.Set;
 
 import static ru.kata.spring.boot_security.demo.configs.WebSecurityConfig.getPrincipal;
 
@@ -20,7 +16,6 @@ import static ru.kata.spring.boot_security.demo.configs.WebSecurityConfig.getPri
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
     private final UserService userService;
-    private final RoleService roleService;
 
     @GetMapping("/admin")
     public String getAllUsers(Model model) {
