@@ -7,9 +7,9 @@ import ru.kata.spring.boot_security.demo.dto.UserRequestDTO;
 import ru.kata.spring.boot_security.demo.dto.UserResponseDTO;
 import ru.kata.spring.boot_security.demo.dto.converter.UserConverter;
 import ru.kata.spring.boot_security.demo.entity.User;
+import ru.kata.spring.boot_security.demo.exceptionHandling.UserNotFoundException;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -17,25 +17,23 @@ import java.util.List;
 public class UserServiceImp implements UserService {
 
     private final UserConverter userConverter;
-
     private final UserRepository userRepository;
-    private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserResponseDTO addUser(UserRequestDTO user) {
         String encode = passwordEncoder.encode(user.getPassword());
-       return userConverter.entityToDTO(userRepository.save(userConverter.convert(user.setPassword(encode))));
+        return userConverter.entityToDTO(userRepository.save(userConverter.convert(user.setPassword(encode))));
     }
 
     @Override
     public UserResponseDTO getUserById(Long id) {
-        return userConverter.entityToDTO(userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.format("Пользователь с id %s не найден", id))));
+        return userConverter.entityToDTO(userRepository.findById(id).orElseThrow(UserNotFoundException::new));
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new EntityNotFoundException(String.format("Пользователь с email %s не найден", email)));
+        return userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
     }
 
     @Override
@@ -49,7 +47,8 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void updateUser(User user, Long id, String roles) {
-//        addUser(user, roles);
+    public UserResponseDTO updateUser(UserRequestDTO userRequestDTO, Long id) {
+        User user = userConverter.convert(userRequestDTO).setId(id);
+        return userConverter.entityToDTO(userRepository.save(user));
     }
 }

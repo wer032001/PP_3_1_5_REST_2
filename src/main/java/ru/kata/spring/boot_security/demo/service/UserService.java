@@ -17,5 +17,5 @@ public interface UserService {
 
     void removeUser(Long id);
 
-    void updateUser(User user, Long id, String roles);
+    UserResponseDTO updateUser(UserRequestDTO userRequestDTO, Long id);
 }

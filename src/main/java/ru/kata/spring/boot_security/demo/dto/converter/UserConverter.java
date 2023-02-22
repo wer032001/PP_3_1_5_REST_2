@@ -8,8 +8,6 @@ import ru.kata.spring.boot_security.demo.dto.UserResponseDTO;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 
-import java.util.Set;
-
 @Service
 @RequiredArgsConstructor
 public class UserConverter implements Converter<UserRequestDTO, User> {
@@ -24,7 +22,7 @@ public class UserConverter implements Converter<UserRequestDTO, User> {
                 .setAge(source.getAge())
                 .setEmail(source.getEmail())
                 .setPassword(source.getPassword())
-                .setRoles(Set.of(roleService.getRole(source.getRole())));
+                .setRoles(roleService.checkRole(source.getRole()));
     }
 
     public UserResponseDTO entityToDTO(User source) {

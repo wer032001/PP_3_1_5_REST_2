@@ -19,7 +19,6 @@ public class RoleServiceImp implements RoleService {
 
     @Override
     public Set<Role> checkRole(String role) {
-        System.out.println(role);
         if (role.equals("ADMIN,USER")) {
             return Set.of(getRole("ADMIN"), getRole("USER"));
         } else {
