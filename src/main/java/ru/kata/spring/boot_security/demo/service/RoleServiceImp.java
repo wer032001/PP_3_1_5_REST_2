@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.entity.Role;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Set;
 
 @Service
@@ -14,7 +15,7 @@ public class RoleServiceImp implements RoleService {
 
     @Override
     public Role getRole(String name) {
-        return roleRepository.findByName(name).get();
+        return roleRepository.findByName(name).orElseThrow(() -> new EntityNotFoundException(String.format("Пользователь с Ролью %s не найден", name)));
     }
 
     @Override
