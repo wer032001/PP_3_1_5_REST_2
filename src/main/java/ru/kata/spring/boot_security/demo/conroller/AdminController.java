@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.conroller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.dto.UserRequestDTO;
 import ru.kata.spring.boot_security.demo.dto.UserResponseDTO;
@@ -10,11 +9,10 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 import java.util.List;
 
-@Controller
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin")
-//@PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
     private final UserService userService;
 
