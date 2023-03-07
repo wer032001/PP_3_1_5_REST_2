@@ -32,6 +32,7 @@ public class UserConverter implements Converter<UserRequestDTO, User> {
                 .setLastName(source.getLastName())
                 .setAge(source.getAge())
                 .setEmail(source.getEmail())
+                .setPassword(source.getPassword())
                 .setRole(source.getStringRoles());
     }
 }
