@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.conroller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.dto.UserRequestDTO;
 import ru.kata.spring.boot_security.demo.dto.UserResponseDTO;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
     private final UserService userService;
 

@@ -9,7 +9,11 @@
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <title>Table Users</title>
 </head>
-
+<style>
+    .fade:not(.show) {
+        display: none;
+    }
+</style>
 <body>
 <div class="text-bg-dark p-3 d-flex justify-content-between align-items-center">
     <div class="d-flex">
@@ -152,7 +156,7 @@
                                                        style="display: flex; justify-content: center; font-size: 18px; font-weight: 500;">Password</label>
                                                 <input type="password" class="form-control" name="password"
                                                        id="password"
-                                                       placeholder="Enter Password" readonly/>
+                                                       placeholder="Enter Password"/>
                                             </div>
                                             <div>
                                                 <label for="roles"

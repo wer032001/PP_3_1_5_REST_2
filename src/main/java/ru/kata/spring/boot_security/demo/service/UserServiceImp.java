@@ -49,6 +49,7 @@ public class UserServiceImp implements UserService {
     @Override
     public UserResponseDTO updateUser(UserRequestDTO userRequestDTO, Long id) {
         User user = userConverter.convert(userRequestDTO).setId(id);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userConverter.entityToDTO(userRepository.save(user));
     }
 }
